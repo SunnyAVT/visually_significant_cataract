@@ -1,5 +1,5 @@
-# AI4cataract
-AI classification model for cataract prediction
+# Visually Significant Cataract AI Model Test
+AI classification model for Visually Significant Cataract prediction
 
 # Prerequisite
 
@@ -97,36 +97,33 @@ Copy all testing fundus image files into one folder, e.g. **./images**. The supp
 
 ## Usage
 ```
-usage: python3.7 main.py --input DATASET_DIR [--label LABEL_FILE] [--output OUTPUT_DIR] [--threshold THRESHOLD_VALUE] [-h]
+usage: python3.7 main.py --input DATASET_DIR [--output OUTPUT_DIR] [--threshold THRESHOLD_VALUE] [-h]
 
 options:
   --input DATASET_DIR         The input directory for dataset image files, must be specified.
-  --label LABEL_FILE          The ground truth csv file, optional.
   --output OUTPUT_DIR         The result output csv file directory, optional, default to *./outputs*.
-  --threshold THRESHOLD_VALUE The threshold value, optional.
   -h                          Show command line options.
 
 examples:
   python3.7 main.py
-  python3.7 main.py --input ./images --label ground_truth.csv --output ./outputs --threshold 0.013259
+  python3.7 main.py --input ./images --output ./outputs 
 ```
 
 ## Result
 The prediction result will be shown at the end of the program stdout. The result will be also stored in a file with name **TestResult.csv** in **OUTPUT_DIR**.
 
 ## Example
-There are 6 sample images under ./images directory for demo purpose:
+There are 4 sample images under ./images directory for demo purpose:
 ```
 > python3.7 main.py --input ./images --output ./outputs
 Using Theano backend.
 loading model: referable_0.48_16July_Resnet50.dat
 loading 34 model, time 0.02
-100%|###################################################################################| 6/6 [00:09<00:00,  1.54s/it]
-filename:['201699522_L.jpg'], probability:0.403930693865
-filename:['201699522_R.jpg'], probability:0.26423445344
-filename:['201696189_R.jpg'], probability:0.145239412785
-filename:['201696189_L.jpg'], probability:0.0595651604235
-filename:['201698588_R.jpg'], probability:0.162557944655
-filename:['201698588_L.jpg'], probability:0.128469750285
+100%|##########################################################| 4/4 [00:10<00:00,  3.30s/it]
+filename:['201699522_L.jpg'], probability:0.4039306938648224
+filename:['201696189_R.jpg'], probability:0.14523939788341522
+filename:['201696189_L.jpg'], probability:0.05956516042351723
+filename:['201698588_R.jpg'], probability:0.1625579446554184
 Cataract Test is Over, Get your results in outputs/TestResult.csv !!!
 ```
+Note: You can replace the images in ./images directory with your test retinal fundus images, then run the same command as above for the AI cataract prediction.
