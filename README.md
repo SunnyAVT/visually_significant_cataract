@@ -115,8 +115,10 @@ options:
   -h                          Show command line options.
 
 examples:
-  python3.7 main.py
-  python3.7 main.py --input ./images --output ./outputs 
+  git clone https://github.com/SunnyAVT/visually_significant_cataract.git
+  cd visually_significant_cataract
+  python3 main.py
+  python3 main.py --input ./images --output ./outputs 
 ```
 
 ## Result
@@ -143,7 +145,7 @@ Note: You can replace the images in ./images directory with your test retinal fu
 ```
 pip install -r requirements.txt
 ```
-You can use different version python module.
+You can use try different packages module version as below.
 Such as, you can use tensorflow==1.15 to replace tensorflow==1.14.0
 Such as, you can use numpy==1.20.1 to replace numpy==1.19.5
 
