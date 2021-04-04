@@ -5,7 +5,7 @@ Keras-Applications==1.0.6
 Keras-Preprocessing==1.0.5
 keras-vis==0.4.1
 matplotlib==2.2.2
-numpy==1.20.1
+numpy==1.19.5
 opencv-python==3.4.3.18
 openpyxl==2.5.6
 packaging==17.1

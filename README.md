@@ -75,10 +75,11 @@ sudo apt-get upgrade -y
 
 ## Software
 #### Reqired System Software Packages
+Recommend to use python3.7 environment.
 ```
 sudo apt-get install -y python3.7 python-pip python3.7-tk tk-dev build-essential swig libsm6 libxrender1 libxext-dev
 ```
-pip should be upgraded to latest version:
+pip recommend to be upgraded to latest version:
 ```
 pip install --upgrade pip
 ```
@@ -87,6 +88,15 @@ If this is the 1st time to upgrade pip as normal user, logout and login will be 
 #### Required Python Packages
 All required packages with specific versions are listed in file **requirements.txt**, run command to install:
 ```
+pip install -r requirements.txt
+```
+You can also use virtual environment to setup the working environment, run command to install:
+```
+sudo apt-get install python3-venv
+apt-get install python3.7-dev python3.7-venv
+python3 -m venv env
+source env/bin/activate
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -127,3 +137,24 @@ filename:['201698588_R.jpg'], probability:0.1625579446554184
 Cataract Test is Over, Get your results in outputs/TestResult.csv !!!
 ```
 Note: You can replace the images in ./images directory with your test retinal fundus images, then run the same command as above for the AI cataract prediction.
+
+# Bug shooting
+1) Because the OS and working environment difference, it could have error when run
+```
+pip install -r requirements.txt
+```
+You can use different version python module.
+Such as, you can use tensorflow==1.15 to replace tensorflow==1.14.0
+Such as, you can use numpy==1.20.1 to replace numpy==1.19.5
+
+2) Don’t care about the warning message in the running, it will not affect the final results. 
+The reason is that the code stick to use tensorflow 1.x version in order to compatible with some AI libs.
+```
+resnet50.py:60: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(2048, (1, 1), name="res5b_branch2c")`
+  x = Convolution2D(nb_filter3, 1, 1, name=conv_name_base + '2c')(x)
+resnet50.py:51: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(512, (1, 1), name="res5c_branch2a")`
+  x = Convolution2D(nb_filter1, 1, 1, name=conv_name_base + '2a')(input_tensor)
+resnet50.py:56: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(512, (3, 3), name="res5c_branch2b", padding="same")`
+  border_mode='same', name=conv_name_base + '2b')(x)
+resnet50.py:60: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(2048, (1, 1), name="res5c_branch2c")`
+```
