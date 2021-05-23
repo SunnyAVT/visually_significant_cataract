@@ -42,7 +42,8 @@ from imagenet_utils import preprocess_input
 
 prj_path = './'
 error_code = 0
-MODEL_NAME = 'referable_0.48_16July_Resnet50.dat'
+# MODEL_NAME = 'referable_0.48_16July_Resnet50.dat'
+MODEL_NAME = 'paper_retina_ref_048_Resnet50_cataract_model_p3.dat'
 model_index = 1
 models = ['VGG16', 'Resnet50', 'Densenet112', 'inres']
 
@@ -349,7 +350,11 @@ def load_model(model_name):
 
         # info = pickle.dumps(clf, protocol=2)
         # clf = pickle.load(open("new_model.dat", "rb"), encoding="latin1")
-        clf = pickle.load(open(model_name, "rb"), encoding='latin1')
+
+        # xiaofeng use python3 model instead now
+        # clf = pickle.load(open(model_name, "rb"), encoding='latin1')
+        clf = pickle.load(open(model_name, "rb"))
+
         # with open(model_name, 'rb') as f:
         #     clf = pickle.load(f, encoding="bytes")
             # clf = pickle.load(f, encoding = 'iso-8859-1')
@@ -368,6 +373,9 @@ def load_model(model_name):
         # # Load from file
         # joblib_file = "joblib_model.pkl"
         # clf = joblib.load(joblib_file)
+
+        # with open("paper_retina_ref_048_Resnet50_cataract_model_p3.dat", 'wb') as outfile:
+        #     pickle.dump(clf, outfile, protocol=-1)
     else:
         raise('No model found...')
     return clf
