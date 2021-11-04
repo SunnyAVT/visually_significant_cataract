@@ -13,45 +13,45 @@ AI classification model for Visually Significant Cataract prediction
 A sudo user is required for running commands in following sections.
 
 ## Operating System
-Ubuntu 18.04 LTS (64 bits) or Ubuntu 16.04 LTS (64 bits)
+Ubuntu 18.04 LTS (64 bits), Ubuntu 16.04 LTS (64 bits), Ubuntu 20.04 LTS or later versioin
 
 #### /etc/apt/sources.list
 ```
 # See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
 # newer versions of the distribution.
-deb http://archive.ubuntu.com/ubuntu/ bionic main restricted
+deb http://archive.ubuntu.com/ubuntu/bionic main restricted
 # deb-src http://archive.ubuntu.com/ubuntu/ bionic main restricted
 
 ## Major bug fix updates produced after the final release of the
 ## distribution.
-deb http://archive.ubuntu.com/ubuntu/ bionic-updates main restricted
-# deb-src http://archive.ubuntu.com/ubuntu/ bionic-updates main restricted
+deb http://archive.ubuntu.com/ubuntu/bionic-updates main restricted
+# deb-src http://archive.ubuntu.com/ubuntu/bionic-updates main restricted
 
 ## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
 ## team. Also, please note that software in universe WILL NOT receive any
 ## review or updates from the Ubuntu security team.
-deb http://archive.ubuntu.com/ubuntu/ bionic universe
-# deb-src http://archive.ubuntu.com/ubuntu/ bionic universe
-deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe
-# deb-src http://archive.ubuntu.com/ubuntu/ bionic-updates universe
+deb http://archive.ubuntu.com/ubuntu/bionic universe
+# deb-src http://archive.ubuntu.com/ubuntu/bionic universe
+deb http://archive.ubuntu.com/ubuntu/bionic-updates universe
+# deb-src http://archive.ubuntu.com/ubuntu/bionic-updates universe
 
 ## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
 ## team, and may not be under a free licence. Please satisfy yourself as to
 ## your rights to use the software. Also, please note that software in
 ## multiverse WILL NOT receive any review or updates from the Ubuntu
 ## security team.
-deb http://archive.ubuntu.com/ubuntu/ bionic multiverse
+deb http://archive.ubuntu.com/ubuntu/bionic multiverse
 # deb-src http://archive.ubuntu.com/ubuntu/ bionic multiverse
-deb http://archive.ubuntu.com/ubuntu/ bionic-updates multiverse
-# deb-src http://archive.ubuntu.com/ubuntu/ bionic-updates multiverse
+deb http://archive.ubuntu.com/ubuntu/bionic-updates multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/bionic-updates multiverse
 
 ## N.B. software from this repository may not have been tested as
 ## extensively as that contained in the main release, although it includes
 ## newer versions of some applications which may provide useful features.
 ## Also, please note that software in backports WILL NOT receive any review
 ## or updates from the Ubuntu security team.
-deb http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse
-# deb-src http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/bionic-backports main restricted universe multiverse
+# deb-src http://archive.ubuntu.com/ubuntu/bionic-backports main restricted universe multiverse
 
 ## Uncomment the following two lines to add software from Canonical's
 ## 'partner' repository.
@@ -60,12 +60,12 @@ deb http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe 
 # deb http://archive.canonical.com/ubuntu bionic partner
 # deb-src http://archive.canonical.com/ubuntu bionic partner
 
-deb http://security.ubuntu.com/ubuntu/ bionic-security main restricted
-# deb-src http://security.ubuntu.com/ubuntu/ bionic-security main restricted
-deb http://security.ubuntu.com/ubuntu/ bionic-security universe
-# deb-src http://security.ubuntu.com/ubuntu/ bionic-security universe
-deb http://security.ubuntu.com/ubuntu/ bionic-security multiverse
-# deb-src http://security.ubuntu.com/ubuntu/ bionic-security multiverse
+deb http://security.ubuntu.com/ubuntu/bionic-security main restricted
+# deb-src http://security.ubuntu.com/ubuntu/bionic-security main restricted
+deb http://security.ubuntu.com/ubuntu/bionic-security universe
+# deb-src http://security.ubuntu.com/ubuntu/bionic-security universe
+deb http://security.ubuntu.com/ubuntu/bionic-security multiverse
+# deb-src http://security.ubuntu.com/ubuntu/bionic-security multiverse
 ```
 #### System should be updated to latest version:
 ```
@@ -140,8 +140,8 @@ Cataract Test is Over, Get your results in outputs/TestResult.csv !!!
 ```
 Note: You can replace the images in ./images directory with your test retinal fundus images, then run the same command as above for the AI cataract prediction.
 
-# Bug shooting
-1) Because the OS and working environment difference, it could have error when run
+# Trouble shooting
+1) Because of the difference in the OS, installation package or running environment, user could encounter error in setup
 ```
 pip install -r requirements.txt
 ```
@@ -149,7 +149,7 @@ You can use try different packages module version as below.
 Such as, you can use tensorflow==1.15 to replace tensorflow==1.14.0
 Such as, you can use numpy==1.20.1 to replace numpy==1.19.5
 
-2) Don’t care about the warning message in the running, it will not affect the final results. 
+2) Don’t need to care about the warning message in the running, it will not affect the final results. 
 The reason is that the code stick to use tensorflow 1.x version in order to compatible with some AI libs.
 ```
 resnet50.py:60: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(2048, (1, 1), name="res5b_branch2c")`
