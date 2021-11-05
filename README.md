@@ -129,8 +129,9 @@ There are 4 sample images under ./images directory for demo purpose:
 ```
 > python3.7 main.py --input ./images --output ./outputs
 Using Theano backend.
-loading model: referable_0.48_16July_Resnet50.dat
-loading 34 model, time 0.02
+loading model: paper_retina_ref_048_Resnet50_cataract_model_p3.dat
+loading paper_retina_ref_048_Resnet50_cataract_model_p3.dat model, time 0.03
+
 100%|##########################################################| 4/4 [00:10<00:00,  3.30s/it]
 filename:['201699522_L.jpg'], probability:0.4039306938648224
 filename:['201696189_R.jpg'], probability:0.14523939788341522
