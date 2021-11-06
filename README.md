@@ -83,11 +83,11 @@ loading model: paper_retina_ref_048_Resnet50_cataract_model_p3.dat
 loading paper_retina_ref_048_Resnet50_cataract_model_p3.dat model, time 0.03
 
 100%|##########################################################| 4/4 [00:10<00:00,  3.30s/it]
-filename:['201699522_L.jpg'], probability:0.4039306938648224
-filename:['201696189_R.jpg'], probability:0.14523939788341522
-filename:['201696189_L.jpg'], probability:0.05956516042351723
-filename:['201698588_R.jpg'], probability:0.1625579446554184
-Cataract Test is Over, Get your results in outputs/TestResult.csv !!!
+filename:['201696189_L.jpg'], probability_0:0.9404348134994507, probability_1:0.05956516042351723
+filename:['201698588_R.jpg'], probability_0:0.8374420404434204, probability_1:0.1625579446554184
+filename:['201699522_L.jpg'], probability_0:0.5960693359375, probability_1:0.4039306938648224
+filename:['201696189_R.jpg'], probability_0:0.8547605872154236, probability_1:0.14523939788341522
+Cataract Validation is Over, please get your results in outputs/TestResult.csv !!!
 ```
 Note: You can replace the images in ./images directory with your test retinal fundus images, then run the same command as above for the AI cataract prediction.
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This module is to test cataract model.
+This module is for cataract model validation.
 Commands:
 
 python3.7 main.py --input INPUT_FILEPATH --label LABEL_FILE --output outputs --threshold float_value
@@ -51,8 +51,8 @@ models = ['VGG16', 'Resnet50', 'Densenet112', 'inres']
 def feat_extract(model, img):
     img = np.array(img, dtype=np.float32)
     img = preprocess_input(img)
-    feat = model.predict(img)
-    feat = np.reshape(feat, (feat.shape[0], -1))
+    feat = model.predict(img)    # (1, 1, 1, 2048)
+    feat = np.reshape(feat, (feat.shape[0], -1))    # (1, 2048)
     return feat
 
 def get_model(index):
@@ -125,7 +125,7 @@ def regression_plot(y, y_pred_class):
     return
 
 
-class MMD_Dataset(Dataset):
+class Fundus_Dataset(Dataset):
     def __init__(self, data_dir, image_list_file, transform=None, target_transform=None):
         """
         Args:
@@ -181,75 +181,6 @@ class MMD_Dataset(Dataset):
     def __current_filename__(self):
         return self.filename
 
-
-def test_accuracy(y, y_pred, is_regression=False):
-    # regression accuracy
-    if is_regression:
-        # averg_pre = mean_absolute_error(y, y_pred)
-        # r2 = r2_score(y, y_pred)
-        # return 0, r2, averg_pre
-        return
-
-    y_pr = []
-    for i in y_pred:
-        if i > 0.15:
-        # if i > 0.79:
-            y_pr.append(0)
-        else:
-            y_pr.append(1)
-
-    y_pr = np.array(y_pr)
-    TP = 0.0
-    FN = 0.0
-    TN = 0.0
-    FP = 0.0
-
-    for i_true, i_pred in zip(y, y_pr):
-        if i_true == 1:
-            if i_pred == i_true:
-                TP += 1
-            else:
-                FN += 1
-
-        if i_true == 0:
-            if i_pred == i_true:
-                TN += 1
-            else:
-                FP += 1
-    '''
-    Precision = TP/TP+FP    (i.e  PPV)
-    Recall = TP / FN+TP
-    F1 score = 2 * (precision * recall)/ (precision + recall)
-    Sensitivity = TP / FN+TP (i.e  Recall)
-    Specificity = TN / FP+TN
-    Accuracy = (TP+TN)/(TP+FP+TN+FN)
-    PPV = TP / (TP + FP)
-    NPV = TN / (TN + FN)
-    '''
-    if TP + FP == 0:
-        Precision = 1.0
-    else:
-        Precision = TP / (TP + FP)
-
-    if TP + FN == 0:
-        Sensitivity = 0.0
-    else:
-        Sensitivity = TP / (TP + FN)
-
-    if TN + FN == 0:
-        NPV = 0.0
-    else:
-        NPV = TN / (TN + FN)
-
-    if TN + FP == 0:
-        Specificity = 1.0
-    else:
-        Specificity = TN / (TN + FP)
-
-    F1 = 2 * Precision * Sensitivity / (Precision + Sensitivity)
-    Accuracy = (TP + TN) / len(y)
-
-    return Precision, Sensitivity, Specificity, F1, Accuracy, NPV
 
 def is_img(ext):
     ext = ext.lower()
@@ -346,39 +277,21 @@ class WrappedModel(nn.Module):
 def load_model(model_name):
     if os.path.isfile(model_name):
         print('loading model: %s' % (model_name))
-        # clf = pickle.load(open(model_name, "rb"))
 
         # info = pickle.dumps(clf, protocol=2)
         # clf = pickle.load(open("new_model.dat", "rb"), encoding="latin1")
 
-        # xiaofeng use python3 model instead now
+        # Note: the previous model was trained in python2 environment
+        # We covert it to model which can run with python3 model now
         # clf = pickle.load(open(model_name, "rb"), encoding='latin1')
         clf = pickle.load(open(model_name, "rb"))
-
-        # with open(model_name, 'rb') as f:
-        #     clf = pickle.load(f, encoding="bytes")
-            # clf = pickle.load(f, encoding = 'iso-8859-1')
-
-        # with open("p3_model.dat", 'wb') as outfile:
-        #     pickle.dump(clf, outfile, protocol=-1)
-
-        # with open(model_name, 'rb') as file_object:
-        #     clf = pickle.load(file_object)
-        #     # print(raw_data)
-
-        # joblib doesn't support python 2/3 convert
-        #     # Save to file in the current working directory
-        #     joblib_file = "joblib_model.pkl"
-        #     joblib.dump(clf, joblib_file)
-        # # Load from file
-        # joblib_file = "joblib_model.pkl"
-        # clf = joblib.load(joblib_file)
 
         # with open("paper_retina_ref_048_Resnet50_cataract_model_p3.dat", 'wb') as outfile:
         #     pickle.dump(clf, outfile, protocol=-1)
     else:
         raise('No model found...')
     return clf
+
 
 def parse_args():
     """
@@ -456,7 +369,7 @@ if __name__ == '__main__':
             TEST_IMAGE_LIST = None
         data = {
             'test':
-                MMD_Dataset(data_dir=DATA_DIR, image_list_file=TEST_IMAGE_LIST, \
+                Fundus_Dataset(data_dir=DATA_DIR, image_list_file=TEST_IMAGE_LIST, \
                             transform=None, target_transform=None)
         }
         # Dataloader iterators
@@ -483,9 +396,6 @@ if __name__ == '__main__':
             batch_pred = net.predict_proba(feat_test)
             y_pred.append(batch_pred)
 
-        # import pdb
-        # pdb.set_trace()
-
         Y_list = np.array(Y_list, dtype=int)
         file_list = np.array(file_list)
         y_pred = np.array(y_pred)
@@ -499,7 +409,7 @@ if __name__ == '__main__':
         for i in range(sum_dataset):
             probability_0 = y_pred[i, 0]
             probability_1 = y_pred[i, 1]
-            print("filename:{}, probability:{}".format(file_list[i], probability_1))
+            print("filename:{}, probability_0:{}, probability_1:{}".format(file_list[i], probability_0, probability_1))
 
             Threshold_Cataract = threshold
             class_result = 0
@@ -525,7 +435,7 @@ if __name__ == '__main__':
         y_pred = net.predict_proba(feat_test)
         probability_0 = y_pred[0, 0]
         probability_1 = y_pred[0, 1]
-        print("filename:{}, probability:{}" .format(filename, probability_1))
+        print("filename:{}, probability_0:{}, probability_1:{}" .format(filename, probability_0, probability_1))
 
         statistic_file = os.path.join(output_dir, 'TestResult.csv')
         if os.path.isfile(statistic_file):
@@ -543,4 +453,4 @@ if __name__ == '__main__':
                 .format(filename, models[model_index], Threshold_Cataract, probability_0, probability_1, class_result))
         C.close()
 
-    print("Cataract Test is Over, Get your results in {} !!!\n" .format(statistic_file))
+    print("Cataract Validation is Over, please get your results in {} !!!\n" .format(statistic_file))
