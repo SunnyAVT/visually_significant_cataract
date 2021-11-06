@@ -112,13 +112,13 @@ resnet50.py:56: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv
 resnet50.py:60: UserWarning: Update your `Conv2D` call to the Keras 2 API: `Conv2D(2048, (1, 1), name="res5c_branch2c")`
 ```
 
-# Citation
-Please cite our paper if you find this code useful in your research. The BibTeX entry for the paper is:
-APA
+# Citation (TBD)
+Please cite our paper if you find this code useful in your research. 
+The APA entry for the paper is:
 ```
 Tham, Y. C., Goh, J. H. L., Anees, A., Lei, X, et al., Detecting Visually Significant Age-Related Cataract using Retinal Photograph-Based Deep Learning: Development, Validation, and Comparison with Clinical Experts (Version 2.0.4) [Computer software]. https://doi.org/10.xxx/zenodo.xxxx
 ```
-BibTeX
+The BibTeX entry for the paper is:
 ```
 @software{Tham_Detecting_Visually_Significant,
 author = {Tham, Yih Chung and Goh, Jocelyn Hui Lin and Anees, Ayesha and Lei, Xiaofeng, et al.},
